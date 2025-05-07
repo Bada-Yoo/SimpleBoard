@@ -1,9 +1,9 @@
-### IntelliJ IDEA ###
+### 인텔리제이 파일 ###
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-### Eclipse ###
+### 이클립스 파일 ###
 .apt_generated
 .classpath
 .factorypath
