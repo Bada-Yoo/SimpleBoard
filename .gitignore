@@ -1,1 +1,20 @@
+<<<<<<< HEAD
 /bin/
+=======
+### 인텔리제이 파일 ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### 이클립스 파일 ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+>>>>>>> branch 'main' of https://github.com/Bada-Yoo/SimpleBoard.git
