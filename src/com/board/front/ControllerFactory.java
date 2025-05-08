@@ -1,8 +1,7 @@
 package com.board.front;
 
-import com.board.controllers.DetailController;
-import com.board.controllers.ListController;
-
+import com.board.front.ActivateControllerInterface;
+import com.board.controllers.*;
 
 public class ControllerFactory {
 
@@ -14,8 +13,6 @@ public class ControllerFactory {
 		  case "list"->{controller = new ListController();}
 		  case "detail"->{controller = new DetailController();}
 		}
-		
-		
 		return controller;
 	}
 

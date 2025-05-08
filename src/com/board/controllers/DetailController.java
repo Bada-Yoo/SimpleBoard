@@ -103,9 +103,8 @@ public class DetailController implements ActivateControllerInterface {
             return;
         }
 
-        System.out.printf("게시글 ID: %d, 제목 [%s]\n", board.getId(), board.getTitle());
-        System.out.printf("                      작성자: %s\n", board.getWriter());
-        System.out.printf(board.getContent());
-        System.out.printf("                      작성일: %s\n", board.getCreatedDate());
+        System.out.printf("게시글 %d 제목 [%s] 작성자: %s\n", board.getId(), board.getTitle(), board.getWriter());
+        System.out.println(board.getContent());
+        System.out.printf("작성일: %s\n", board.getCreatedDate());
     }
 }
