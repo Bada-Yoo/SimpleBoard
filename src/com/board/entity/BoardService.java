@@ -7,11 +7,11 @@ public class BoardService {
         return boardDAO.selectDetail(id);
     }
 
-    public int update(BoardDTO board) {
-        return boardDAO.update(board);
+    public int updateBoard(BoardDTO board) {
+        return boardDAO.updateBoard(board);
     }
 
-    public int delete(int id) {
+    public int deleteBoard(int id) {
         return boardDAO.deleteById(id);
     }
   	public static int insertBoard(String title, String content, String writer) {

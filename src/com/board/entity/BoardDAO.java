@@ -49,7 +49,7 @@ public class BoardDAO {
     }
 
     // update
-    public int update(BoardDTO board) {
+    public int updateBoard(BoardDTO board) {
         int result = 0;
         Connection conn = DBUtil.getConnection();
         PreparedStatement pst = null;
