@@ -9,8 +9,8 @@
   - 역할: 글쓰기 기능 구현, DB구현
 
 - 안가연
-  - 구현: `ListController`, //~~`BoardDAO.selectAll()`
-  - 커밋: -회
+  - 구현: `ListController`, // `BoardDAO.selectBoard() 기능
+  - 커밋: 3회
   - 역할: 목록 조회 기능 구현
 
 - 류채린
