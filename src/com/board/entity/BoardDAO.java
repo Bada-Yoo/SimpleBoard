@@ -1,15 +1,112 @@
 package com.board.entity;
 
+
+import com.board.front.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.board.front.DBUtil;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BoardDAO {
-	
-	//insert
-	public static int insertBoard(String title, String content, String writer) {
+    // selectDetail
+    public BoardDTO selectDetail(int id) {
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        String sql = "select * from board where id = ?";
+
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+
+            if(rs.next()) {
+                BoardDTO board = makeBoard(rs);
+                return board;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.dbDisconnect(conn, pst, rs);
+        }
+
+        return null;
+    }
+
+    private BoardDTO makeBoard(ResultSet rs) throws SQLException {
+        BoardDTO board = BoardDTO.builder()
+                .id(rs.getInt("id"))
+                .title(rs.getString("title"))
+                .content(rs.getString("content"))
+                .writer(rs.getString("writer"))
+                .createdDate(rs.getTimestamp("createdDate"))
+                .build();
+
+        return board;
+    }
+
+    // update
+    public int updateBoard(BoardDTO board) {
+        int result = 0;
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pst = null;
+
+        Map<String, Object> dynamicSQL = new HashMap<>();
+
+        if(board.getTitle() != null) dynamicSQL.put("title", board.getTitle());
+        if(board.getContent() != null) dynamicSQL.put("content", board.getContent());
+        if(board.getWriter() != null) dynamicSQL.put("writer", board.getWriter());
+        if(board.getCreatedDate() != null) dynamicSQL.put("createdDate", board.getCreatedDate());
+
+        String sql = "update board set ";
+        String sql2 = " where id = ?";
+        for(String key : dynamicSQL.keySet()) {
+            sql += key + " = ?, ";
+        }
+        sql = sql.substring(0, sql.length() - 2);
+        sql += sql2;
+
+        try {
+            pst = conn.prepareStatement(sql);
+            int i = 1;
+            for(String key : dynamicSQL.keySet()) {
+                pst.setObject(i++, dynamicSQL.get(key));
+            }
+            pst.setInt(i, board.getId());
+            result = pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.dbDisconnect(conn, pst, null);
+        }
+
+        return result;
+    }
+
+    // delete
+    public int deleteById(int id) {
+        int result = 0;
+        Connection conn = DBUtil.getConnection();
+        PreparedStatement pst = null;
+        String sql = "delete from board where id = ?";
+        try {
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, id);
+            result = pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.dbDisconnect(conn, pst, null);
+        }
+
+        return result;
+    }
+    
+    //insert
+  	public static int insertBoard(String title, String content, String writer) {
 		int result = 0;
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement st = null;
@@ -35,16 +132,5 @@ public class BoardDAO {
 		}
 		return result;
 	}
-	
-	//make
-	private BoardDTO makeBoard(ResultSet rs) throws SQLException {
-		BoardDTO board = BoardDTO.builder()
-				.id(rs.getInt("ID"))
-				.title(rs.getString("TITLE"))
-				.content(rs.getString("CONTENT"))
-				.writer(rs.getString("WRITER"))
-				.createdDate(rs.getTimestamp("CREATEDDATE"))
-				.build();
-		return board;
-	}
+
 }
