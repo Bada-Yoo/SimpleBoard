@@ -14,4 +14,8 @@ public class BoardService {
     public int delete(int id) {
         return boardDAO.deleteById(id);
     }
+  	public static int insertBoard(String title, String content, String writer) {
+	  	return BoardDAO.insertBoard(title, content, writer);
+	}
+
 }
