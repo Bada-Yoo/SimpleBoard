@@ -14,15 +14,14 @@ public class BoardDAO {
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement st = null;
 		String sql = """
-				insert into cart(
+				insert into simpleboard(
 					ID,
 					TITLE,
 					CONTENT,
 					WRITER,
-					CREATEDDATE,
+					CREATEDDATE
 				)values(board_seq.nextval,?,?,?,sysdate)
 				""";
-		
 		try {
 			st = conn.prepareStatement(sql);
 			st.setString(1, title);
