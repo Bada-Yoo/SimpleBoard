@@ -16,7 +16,7 @@ public class BoardDAO {
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-        String sql = "select * from board where id = ?";
+        String sql = "select * from simpleboard where id = ?";
 
         try {
             pst = conn.prepareStatement(sql);
@@ -61,7 +61,7 @@ public class BoardDAO {
         if(board.getWriter() != null) dynamicSQL.put("writer", board.getWriter());
         if(board.getCreatedDate() != null) dynamicSQL.put("createdDate", board.getCreatedDate());
 
-        String sql = "update board set ";
+        String sql = "update simpleboard set ";
         String sql2 = " where id = ?";
         for(String key : dynamicSQL.keySet()) {
             sql += key + " = ?, ";
@@ -91,7 +91,7 @@ public class BoardDAO {
         int result = 0;
         Connection conn = DBUtil.getConnection();
         PreparedStatement pst = null;
-        String sql = "delete from board where id = ?";
+        String sql = "delete from simpleboard where id = ?";
         try {
             pst = conn.prepareStatement(sql);
             pst.setInt(1, id);
