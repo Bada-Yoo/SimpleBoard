@@ -1,6 +1,8 @@
 package com.board.front;
 
 import com.board.controllers.DetailController;
+import com.board.controllers.ListController;
+
 
 public class ControllerFactory {
 
@@ -8,7 +10,7 @@ public class ControllerFactory {
 		ActivateControllerInterface controller = null;
 		
 		switch (business) {
-		  case "write"->{controller = new WriteController();}
+//		  case "write"->{controller = new WriteController();}
 		  case "list"->{controller = new ListController();}
 		  case "detail"->{controller = new DetailController();}
 		}
@@ -19,3 +21,4 @@ public class ControllerFactory {
 
 
 }
+
