@@ -148,9 +148,11 @@ public class BoardDAO {
   	        Connection conn = DBUtil.getConnection();
   	        Statement st = null;
   	        ResultSet rs = null;
-  	        String sql = """ 
-  	        		select * from SimpleBoard
-  	        		""";
+  	      String sql = """
+  	    	    SELECT * FROM SimpleBoard
+  	    	    ORDER BY id ASC
+  	    	""";
+
   	        try {
 				st = conn.createStatement();
 				rs = st.executeQuery(sql);
