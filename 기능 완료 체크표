@@ -4,9 +4,9 @@
 📌 기능 구현 목록
 
 - 조상호
-  - 구현: `WriteController`, //~~`BoardDAO.insert(), DB구현, BoardDTO구현`
+  - 구현: `WriteController`, //`BoardDAO.insert(), DB구현`
   - 커밋: 7회
-  - 역할: 글쓰기 기능 구현
+  - 역할: 글쓰기 기능 구현, DB구현
 
 - 안가연
   - 구현: `ListController`, //~~`BoardDAO.selectAll()`
