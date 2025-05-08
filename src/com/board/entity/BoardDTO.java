@@ -1,5 +1,5 @@
 package com.board.entity;
 
-public class dummy2 {
-
+public class BoardDTO {
+	
 }
