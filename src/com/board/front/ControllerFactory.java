@@ -9,7 +9,7 @@ public class ControllerFactory {
 		ActivateControllerInterface controller = null;
 		
 		switch (business) {
-		  case "write"->{controller = new WriteController();}
+  		  case "write"->{controller = new WriteController();}
 		  case "list"->{controller = new ListController();}
 		  case "detail"->{controller = new DetailController();}
 		}
@@ -18,3 +18,4 @@ public class ControllerFactory {
 
 
 }
+

@@ -6,7 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BoardDAO {
@@ -107,7 +110,7 @@ public class BoardDAO {
     
     //insert
   	public static int insertBoard(String title, String content, String writer) {
-		int result = 0;
+  		int result = 0;
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement st = null;
 		String sql = """
@@ -132,5 +135,33 @@ public class BoardDAO {
 		}
 		return result;
 	}
+  	
+  	//select
+  	public List<BoardDTO> selectBoard() {
+  		List<BoardDTO> boardList = new ArrayList<>();
+  	    	
+  	        Connection conn = DBUtil.getConnection();
+  	        Statement st = null;
+  	        ResultSet rs = null;
+  	        String sql = """ 
+  	        		select * from SimpleBoard
+  	        		""";
+  	        try {
+				st = conn.createStatement();
+				rs = st.executeQuery(sql);
+				
+				while(rs.next()) {
+					BoardDTO board = makeBoard(rs);
+					boardList.add(board);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}
+  	        return boardList;
+  	       
+  	}
+  	
 
 }
