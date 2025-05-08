@@ -3,7 +3,6 @@ package com.board.controllers;
 import com.board.entity.BoardDTO;
 import com.board.entity.BoardService;
 import com.board.front.ActivateControllerInterface;
-import com.board.front.ControllerFactory;
 
 import java.util.Scanner;
 
@@ -47,12 +46,50 @@ public class DetailController implements ActivateControllerInterface {
             return;
         }
 
-        int result = boardService.delete(id);
+        int result = boardService.deleteBoard(id);
         System.out.println(result + "개의 게시글이 삭제되었습니다.");
     }
 
     private void f_update() {
+        System.out.print("수정할 게시글의 ID를 입력하세요: ");
+        int id = sc.nextInt();
+        sc.nextLine();
 
+        BoardDTO board = boardService.selectDetail(id);
+        if(board == null) {
+            System.out.println("해당 게시글이 존재하지 않습니다.");
+            return;
+        }
+
+        int result = boardService.updateBoard(makeBoard(id));
+        System.out.println(result + "개의 게시글이 수정되었습니다.");
+    }
+
+    private BoardDTO makeBoard(int id) {
+        System.out.print("수정할 제목을 입력하세요: ");
+        String title = sc.nextLine();
+        System.out.print("수정할 내용을 입력하세요: ");
+        String content = sc.nextLine();
+        System.out.print("수정할 작성자를 입력하세요: ");
+        String writer = sc.nextLine();
+
+        if(title.equals("0") && content.equals("0") && writer.equals("0")) {
+            System.out.println("수정할 내용이 없습니다.");
+            return null;
+        }
+
+        if(title.equals("0")) title = null;
+        if(content.equals("0")) content = null;
+        if(writer.equals("0")) writer = null;
+
+        BoardDTO board = BoardDTO.builder()
+                .id(id)
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .build();
+
+        return board;
     }
 
     private void f_detatil() {
