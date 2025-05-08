@@ -73,11 +73,6 @@ public class DetailController implements ActivateControllerInterface {
         System.out.print("수정할 작성자를 입력하세요: ");
         String writer = sc.nextLine();
 
-        if(title.equals("0") && content.equals("0") && writer.equals("0")) {
-            System.out.println("수정할 내용이 없습니다.");
-            return null;
-        }
-
         if(title.equals("0")) title = null;
         if(content.equals("0")) content = null;
         if(writer.equals("0")) writer = null;

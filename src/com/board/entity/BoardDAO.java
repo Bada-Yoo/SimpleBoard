@@ -64,6 +64,11 @@ public class BoardDAO {
         if(board.getWriter() != null) dynamicSQL.put("writer", board.getWriter());
         if(board.getCreatedDate() != null) dynamicSQL.put("createdDate", board.getCreatedDate());
 
+        if (dynamicSQL.isEmpty()) {
+            System.out.println("수정할 내용이 없습니다.");
+            return 0;
+        }
+
         String sql = "update simpleboard set ";
         String sql2 = " where id = ?";
         for(String key : dynamicSQL.keySet()) {
